@@ -4,6 +4,7 @@ body {
   line-height: 1;
 }
 
+
 textarea{
   background: transparent;
   border: none;
@@ -11,6 +12,40 @@ textarea{
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+.border-gradient {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+}
+
+.timeslot { 
+  font-size: 20px;
+  background-image: linear-gradient(45deg, #2e2e2e, #0e005a);
+  color: whitesmoke;
+  text-align: center;
+  line-height: normal;
+}
+
+.taskP {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.btn-save {
+  outline: none;
+  border: 4px solid darkblue;
+  padding: 15px 15px;
+  background: #2e2e2e;
+  border-radius: 9px;
+  box-shadow: 0 3px #383838;
+  margin: auto;
+  font-size: 12px;
+}
+
+.border-gradient-purple {
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d, #383838);
 }
 
 .jumbotron {
