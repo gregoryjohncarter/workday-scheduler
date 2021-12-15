@@ -523,3 +523,109 @@ $("#fiveButton").on("click", function() {
     $("#fivePP").text(text);
 
 });
+
+
+var timeSlotsRefresh = function() {
+    
+    var today = new Date();
+    var time = today.getHours();
+
+    var timeSlots = $(".col-8 border-gradient border-gradient-purple d-flex align-items-center")
+    $(timeSlots).removeClass("present past future");
+
+    nineEl = 9;
+
+    if (nineEl < time) {
+       $("#nineA").addClass("past");
+    } else if (nineEl > time) {
+       $("#nineA").addClass("future");
+    } else { 
+       $("#nineA").addClass("present");
+    }
+
+    tenEl = 10;
+
+    if (tenEl < time) {
+       $("#tenA").addClass("past")
+    } else if (tenEl > time) {
+       $("#tenA").addClass("future");
+    } else { 
+       $("#tenA").addClass("present");
+    }
+
+    elevenEl = 11;
+
+    if (elevenEl < time) {
+       $("#elevenA").addClass("past");
+    } else if (elevenEl > time) {
+       $("#elevenA").addClass("future");
+    } else { 
+       $("#elevenA").addClass("present");
+    }
+
+    twelveEl = 12;
+
+    if (twelveEl < time) {
+       $("#twelveP").addClass("past")
+    } else if (twelveEl > time) {
+       $("#twelveP").addClass("future");
+    } else { 
+       $("#twelveP").addClass("present");
+    }
+
+    oneEl = 13;
+
+    if (oneEl < time) {
+       $("#oneP").addClass("past");
+    } else if (oneEl > time) {
+       $("#oneP").addClass("future");
+    } else { 
+       $("#oneP").addClass("present");
+    }
+
+    twoEl = 14;
+
+    if (twoEl < time) {
+       $("#twoP").addClass("past")
+    } else if (twoEl > time) {
+       $("#twoP").addClass("future");
+    } else { 
+       $("#twoP").addClass("present");
+    }
+
+    threeEl = 15;
+
+    if (threeEl < time) {
+       $("#threeP").addClass("past");
+    } else if (threeEl > time) {
+       $("#threeP").addClass("future");
+    } else { 
+       $("#threeP").addClass("present");
+    }
+
+    fourEl = 16;
+
+    if (fourEl < time) {
+       $("#fourP").addClass("past")
+    } else if (fourEl > time) {
+       $("#fourP").addClass("future");
+    } else { 
+       $("#fourP").addClass("present");
+    }
+
+    fiveEl = 17;
+
+    if (fiveEl < time) {
+       $("#fiveP").addClass("past")
+    } else if (fiveEl > time) {
+       $("#fiveP").addClass("future");
+    } else { 
+       $("#fiveP").addClass("present");
+    }
+
+
+}
+
+timeSlotsRefresh();
+
+setInterval(timeSlotsRefresh, 300000);
