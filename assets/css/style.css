@@ -2,6 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-color: black;
 }
 
 
@@ -30,7 +31,11 @@ textarea{
 
 .taskP {
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
+  display: flex;
+  flex: 1 100%;
+  color: whitesmoke;
+  line-height: 20px;
 }
 
 .btn-save {
@@ -50,8 +55,8 @@ textarea{
 
 .jumbotron {
   text-align: center;
-  background-color: transparent;
-  color: black;
+  background-image: linear-gradient(85deg, #303030, rgb(0, 15, 65) );
+  color: whitesmoke;
   border-radius: 0;
   border-bottom: 10px solid black;
 }
