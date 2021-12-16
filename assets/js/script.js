@@ -1,7 +1,4 @@
-// empty storage object
-var tasks = {};
-
-// only allow a single text element to be created, otherwise edit if counts are not at 0 still
+// only allow a single P to be created, otherwise edit if counts are not at 0 still
 var editCount1 = 0;
 var editCount2 = 0;
 var editCount3 = 0;
@@ -17,8 +14,47 @@ var today = moment().format('dddd MMMM Do');
 
 document.getElementById('currentDay').innerHTML = today;
 
+var saveTasks = function() {
+    // set string storage values for converted paragraphs after clicking save button
+    var nineStorage = $("#nineP").text().trim();
+    var tenStorage = $("#tenP").text().trim();
+    var elevenStorage = $("#elevenP").text().trim();
+    var twelveStorage = $("#twelvePP").text().trim();
+    var oneStorage = $("#onePP").text().trim();
+    var twoStorage = $("#twoPP").text().trim();
+    var threeStorage = $("#threePP").text().trim();
+    var fourStorage = $("#fourPP").text().trim();
+    var fiveStorage = $("#fivePP").text().trim();
+
+    // save to object
+    var tasks = {
+        "nine": nineStorage,
+        // count
+        "nineCo": editCount1,
+        "ten": tenStorage,
+        "tenCo": editCount2,
+        "eleven": elevenStorage,
+        "elevenCo": editCount3,
+        "twelve": twelveStorage,
+        "twelveCo": editCount4,
+        "one": oneStorage,
+        "oneCo": editCount5,
+        "two": twoStorage,
+        "twoCo": editCount6,
+        "three": threeStorage,
+        "threeCo": editCount7,
+        "four": fourStorage,
+        "fourCo": editCount8,
+        "five": fiveStorage,
+        "fiveCo": editCount9
+    }
+    // store in local storage as string
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+}
 
 
+// tasks will be loaded from the point of entering/refreshing the page
 var loadTasks = function() {
     tasks = JSON.parse(localStorage.getItem("tasks"));
 
@@ -26,16 +62,87 @@ var loadTasks = function() {
     if (!tasks) {
         tasks = {
             nine: "",
+            nineCo: "",
             ten: "",
+            tenCo: "",
             eleven: "",
+            elevenCo: "",
             twelve: "",
+            twelveCo: "",
             one: "",
+            oneCo: "",
             two: "",
+            twoCo: "",
             three: "",
+            threeCo: "",
             four: "",
-            five: ""
+            fourCo: "",
+            five: "",
+            fiveCo: ""
         }
-    };
+    } else {
+
+        // load and append p's from the object which was parsed from LS
+        var task9 = $("<p>").addClass("taskP d-flex").attr("id", "nineP");
+        var nineAEl = $("#nineA");
+        nineAEl.append(task9);
+        $(task9).text(tasks.nine);
+
+
+        var task10 = $("<p>").addClass("taskP d-flex").attr("id", "tenP");
+        var tenAEl = $("#tenA");
+        tenAEl.append(task10);
+        $(task10).text(tasks.ten);
+
+        var task11 = $("<p>").addClass("taskP d-flex").attr("id", "elevenP");
+        var elevenAEl = $("#elevenA");
+        elevenAEl.append(task11);
+        $(task11).text(tasks.eleven);
+
+
+        var task12 = $("<p>").addClass("taskP d-flex").attr("id", "twelvePP");
+        var twelvePEl = $("#twelveP");
+        twelvePEl.append(task12);
+        $(task12).text(tasks.twelve);
+
+        var task1 = $("<p>").addClass("taskP d-flex").attr("id", "onePP");
+        var onePEl = $("#oneP");
+        onePEl.append(task1);
+        $(task1).text(tasks.one);
+
+
+        var task2 = $("<p>").addClass("taskP d-flex").attr("id", "twoPP");
+        var twoPEl = $("#twoP");
+        twoPEl.append(task2);
+        $(task2).text(tasks.two);
+
+        var task3 = $("<p>").addClass("taskP d-flex").attr("id", "threePP");
+        var threePEl = $("#threeP");
+        threePEl.append(task3);
+        $(task3).text(tasks.three);
+
+
+        var task4 = $("<p>").addClass("taskP d-flex").attr("id", "fourPP");
+        var fourPEl = $("#fourP");
+        fourPEl.append(task4);
+        $(task4).text(tasks.four);
+
+        var task5 = $("<p>").addClass("taskP d-flex").attr("id", "fivePP");
+        var fivePEl = $("#fiveP");
+        fivePEl.append(task5);
+        $(task5).text(tasks.five);
+
+        //load from the object to identify if there is already a p in place (parsed from LS)
+        editCount1 = tasks.nineCo;
+        editCount2 = tasks.tenCo;
+        editCount3 = tasks.elevenCo;
+        editCount4 = tasks.twleveCo;
+        editCount5 = tasks.oneCo;
+        editCount6 = tasks.twoCo;
+        editCount7 = tasks.threeCo;
+        editCount8 = tasks.fourCo;
+        editCount9 = tasks.fiveCo;
+    }
 }
 
 // div area for timeslot - 9 -
@@ -52,15 +159,17 @@ $("#nineA").click(function() {
 
     nineAEl.append(taskP);
 
-    // text of the class which was 
+    // text of the new paragraph as a value, this is redundant but i don't want to change it, see else if 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
+    // replace the p with a textinput
     $(taskP).replaceWith(textInput);
 
     textInput.trigger("focus");
-
+    
+    // add id and class to the new textbox to allow button to select it
     $(textInput).attr("id", "nineText");
     
     $(textInput).addClass("taskP d-flex");
@@ -69,19 +178,21 @@ $("#nineA").click(function() {
     } else if (editCount1 > 0) {
         // text is in a P condition, already been edited once
         var text = $("#nineP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#nineP").replaceWith(textInput);
 
         textInput.trigger("focus");
 
+        // add id and class to the new textbox to allow button to select it
         $(textInput).attr("id", "nineText");
 
         $(textInput).addClass("taskP d-flex");
- 
     }
 });
 
+// save the textarea into a new paragraph function, use the text from the box
 $("#nineButton").on("click", function() {
 
     text = $("#nineText").val();
@@ -90,26 +201,26 @@ $("#nineButton").on("click", function() {
 
     $("#nineP").text(text);
 
+    saveTasks();
+
 });
 
 // div area for timeslot - 10 -
 $("#tenA").click(function() {
-    // if nothing's been created there yet
+
     if (editCount2 === 0) { 
 
     editCount2 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var tenAEl = $("#tenA");
 
     tenAEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -121,9 +232,10 @@ $("#tenA").click(function() {
 
     
     } else if (editCount2 > 0) {
-        // text is in a P condition, already been edited once
+    
         var text = $("#tenP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#tenP").replaceWith(textInput);
 
@@ -144,26 +256,25 @@ $("#tenButton").on("click", function() {
 
     $("#tenP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 11 -
 $("#elevenA").click(function() {
-    // if nothing's been created there yet
+   
     if (editCount3 === 0) { 
 
     editCount3 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var elevenAEl = $("#elevenA");
 
     elevenAEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -175,9 +286,10 @@ $("#elevenA").click(function() {
 
     
     } else if (editCount3 > 0) {
-        // text is in a P condition, already been edited once
+    
         var text = $("#elevenP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#elevenP").replaceWith(textInput);
 
@@ -198,26 +310,25 @@ $("#elevenButton").on("click", function() {
 
     $("#elevenP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 12 -
 $("#twelveP").click(function() {
-    // if nothing's been created there yet
+   
     if (editCount4 === 0) { 
 
     editCount4 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var twelvePEl = $("#twelveP");
 
     twelvePEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -229,9 +340,10 @@ $("#twelveP").click(function() {
 
     
     } else if (editCount4 > 0) {
-        // text is in a P condition, already been edited once
+        
         var text = $("#twelvePP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#twelvePP").replaceWith(textInput);
 
@@ -252,26 +364,25 @@ $("#twelveButton").on("click", function() {
 
     $("#twelvePP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 1 -
 $("#oneP").click(function() {
-    // if nothing's been created there yet
+   
     if (editCount5 === 0) { 
 
     editCount5 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var onePEl = $("#oneP");
 
     onePEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -283,9 +394,10 @@ $("#oneP").click(function() {
 
     
     } else if (editCount5 > 0) {
-        // text is in a P condition, already been edited once
+        
         var text = $("#onePP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#onePP").replaceWith(textInput);
 
@@ -306,26 +418,25 @@ $("#oneButton").on("click", function() {
 
     $("#onePP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 2 -
 $("#twoP").click(function() {
-    // if nothing's been created there yet
+    
     if (editCount6 === 0) { 
 
     editCount6 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var twoPEl = $("#twoP");
 
     twoPEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -337,9 +448,10 @@ $("#twoP").click(function() {
 
     
     } else if (editCount6 > 0) {
-        // text is in a P condition, already been edited once
+        
         var text = $("#twoPP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#twoPP").replaceWith(textInput);
 
@@ -360,26 +472,25 @@ $("#twoButton").on("click", function() {
 
     $("#twoPP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 3 -
 $("#threeP").click(function() {
-    // if nothing's been created there yet
+   
     if (editCount7 === 0) { 
 
     editCount7 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var threePEl = $("#threeP");
 
     threePEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -391,9 +502,10 @@ $("#threeP").click(function() {
 
     
     } else if (editCount7 > 0) {
-        // text is in a P condition, already been edited once
+        
         var text = $("#threePP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#threePP").replaceWith(textInput);
 
@@ -413,27 +525,26 @@ $("#threeButton").on("click", function() {
     $("#threeText").replaceWith("<p id='threePP' class='taskP d-flex'>");
 
     $("#threePP").text(text);
-
+    
+    saveTasks();
 });
 
 // div area for timeslot - 4 -
 $("#fourP").click(function() {
-    // if nothing's been created there yet
+    
     if (editCount8 === 0) { 
 
     editCount8 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var fourPEl = $("#fourP");
 
     fourPEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -445,9 +556,10 @@ $("#fourP").click(function() {
 
     
     } else if (editCount8 > 0) {
-        // text is in a P condition, already been edited once
+        
         var text = $("#fourPP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#fourPP").replaceWith(textInput);
 
@@ -468,26 +580,25 @@ $("#fourButton").on("click", function() {
 
     $("#fourPP").text(text);
 
+    saveTasks();
 });
 
 // div area for timeslot - 5 -
 $("#fiveP").click(function() {
-    // if nothing's been created there yet
+    
     if (editCount9 === 0) { 
 
     editCount9 += 1;
 
-    // create p and identify the div
     var taskP = $("<p>").addClass("taskP d-flex");
 
     var fivePEl = $("#fiveP");
 
     fivePEl.append(taskP);
 
-    // text of the class which was 
     var text = $(taskP).text().trim();
 
-    var textInput = $("<textarea>").addClass("taskP d-flex").val(text);
+    var textInput = $("<textarea maxlength='80'>").addClass("taskP d-flex").val(text);
 
     $(taskP).replaceWith(textInput);
 
@@ -499,9 +610,10 @@ $("#fiveP").click(function() {
 
     
     } else if (editCount9 > 0) {
-        // text is in a P condition, already been edited once
+      
         var text = $("#fivePP").text().trim();
-        var textInput = $("<textarea>").val(text);
+
+        var textInput = $("<textarea maxlength='80'>").val(text);
 
         $("#fivePP").replaceWith(textInput);
 
@@ -522,6 +634,7 @@ $("#fiveButton").on("click", function() {
 
     $("#fivePP").text(text);
 
+    saveTasks();
 });
 
 
@@ -530,11 +643,13 @@ var timeSlotsRefresh = function() {
     var today = new Date();
     var time = today.getHours();
 
+    // select timeslots by class and remove the class before refreshing 
     var timeSlots = $(".col-8 border-gradient border-gradient-purple d-flex align-items-center")
     $(timeSlots).removeClass("present past future");
 
     nineEl = 9;
 
+    // if number in hours is less than its in the past, if its greater than its in the future else present
     if (nineEl < time) {
        $("#nineA").addClass("past");
     } else if (nineEl > time) {
@@ -626,6 +741,9 @@ var timeSlotsRefresh = function() {
 
 }
 
+loadTasks();
+
 timeSlotsRefresh();
 
+// refresh the page every 5 minutes 
 setInterval(timeSlotsRefresh, 300000);
