@@ -2,10 +2,10 @@
 
 ## Purpose: 
 - to allow the user to designate workday events on an interactive page
-- select and edit events to change their titles
-- as events come up or pass their color on the page changes
-- allow timeslots to change background color depending on time proximity
+- select the timeslots to be able to edit the events
+- background color of the events changes depending on if the time has or has not passed
 - save tasks to local storage for persistence
+- automatically check the time every 5 minutes to update background colors
 
 https://gregoryjohncarter.github.io/workday-scheduler/
 

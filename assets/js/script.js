@@ -11,7 +11,6 @@ var editCount9 = 0;
 
 // today
 var today = moment().format('dddd MMMM Do');
-
 document.getElementById('currentDay').innerHTML = today;
 
 var saveTasks = function() {
@@ -50,9 +49,7 @@ var saveTasks = function() {
     }
     // store in local storage as string
     localStorage.setItem("tasks", JSON.stringify(tasks));
-
 }
-
 
 // tasks will be loaded from the point of entering/refreshing the page
 var loadTasks = function() {
@@ -82,74 +79,117 @@ var loadTasks = function() {
         }
     } else {
 
-        // load and append p's from the object which was parsed from LS
+        if (tasks.nine) {
+        // load and append p's from the object which was parsed from LS only if its in storage already
         var task9 = $("<p>").addClass("taskP d-flex").attr("id", "nineP");
         var nineAEl = $("#nineA");
         nineAEl.append(task9);
         $(task9).text(tasks.nine);
+        }
 
-
+        if (tasks.ten) {
         var task10 = $("<p>").addClass("taskP d-flex").attr("id", "tenP");
         var tenAEl = $("#tenA");
         tenAEl.append(task10);
         $(task10).text(tasks.ten);
+        }
 
+        if (tasks.eleven) {
         var task11 = $("<p>").addClass("taskP d-flex").attr("id", "elevenP");
         var elevenAEl = $("#elevenA");
         elevenAEl.append(task11);
         $(task11).text(tasks.eleven);
+        }
 
-
+        if (tasks.twelve) {
         var task12 = $("<p>").addClass("taskP d-flex").attr("id", "twelvePP");
         var twelvePEl = $("#twelveP");
         twelvePEl.append(task12);
         $(task12).text(tasks.twelve);
+        }
 
+        if (tasks.one) {
         var task1 = $("<p>").addClass("taskP d-flex").attr("id", "onePP");
         var onePEl = $("#oneP");
         onePEl.append(task1);
         $(task1).text(tasks.one);
+        }
 
-
+        if (tasks.two) {
         var task2 = $("<p>").addClass("taskP d-flex").attr("id", "twoPP");
         var twoPEl = $("#twoP");
         twoPEl.append(task2);
         $(task2).text(tasks.two);
+        }
 
+        if (tasks.three) {
         var task3 = $("<p>").addClass("taskP d-flex").attr("id", "threePP");
         var threePEl = $("#threeP");
         threePEl.append(task3);
         $(task3).text(tasks.three);
+        }
 
-
+        if (tasks.four) {
         var task4 = $("<p>").addClass("taskP d-flex").attr("id", "fourPP");
         var fourPEl = $("#fourP");
         fourPEl.append(task4);
         $(task4).text(tasks.four);
+        }
 
+        if (tasks.five) {
         var task5 = $("<p>").addClass("taskP d-flex").attr("id", "fivePP");
         var fivePEl = $("#fiveP");
         fivePEl.append(task5);
         $(task5).text(tasks.five);
+        }
 
         //load from the object to identify if there is already a p in place (parsed from LS)
         editCount1 = tasks.nineCo;
+        //fix bug where empty textboxes that get saved add to the counter but dont actually get saved
+        if (tasks.nine.length === 0) {
+            editCount1 = 0;
+        }
         editCount2 = tasks.tenCo;
+        if (tasks.ten.length === 0) {
+            editCount2 = 0;
+        }
         editCount3 = tasks.elevenCo;
-        editCount4 = tasks.twleveCo;
+        if (tasks.eleven.length === 0) {
+            editCount3 = 0;
+        }
+        editCount4 = tasks.twelveCo;
+        if (tasks.twelve.length === 0) {
+            editCount4 = 0;
+        }
         editCount5 = tasks.oneCo;
+        if (tasks.one.length === 0) {
+            editCount5 = 0;
+        }
         editCount6 = tasks.twoCo;
+        if (tasks.two.length === 0) {
+            editCount6 = 0;
+        }
         editCount7 = tasks.threeCo;
+        if (tasks.three.length === 0) {
+            editCount7 = 0;
+        }
         editCount8 = tasks.fourCo;
+        if (tasks.four.length === 0) {
+            editCount8 = 0;
+        }
         editCount9 = tasks.fiveCo;
+        if (tasks.five.length === 0) {
+            editCount9 = 0;
+        }
     }
 }
 
 // div area for timeslot - 9 -
 $("#nineA").click(function() {
+    
     // if nothing's been created there yet
-    if (editCount1 === 0) { 
-
+    if (editCount1 === 0 && $("#nineA").children().length === 0) { 
+          
     editCount1 += 1;
 
     // create p and identify the div
@@ -176,6 +216,8 @@ $("#nineA").click(function() {
 
     
     } else if (editCount1 > 0) {
+
+    
         // text is in a P condition, already been edited once
         var text = $("#nineP").text().trim();
 
@@ -202,14 +244,13 @@ $("#nineButton").on("click", function() {
     $("#nineP").text(text);
 
     saveTasks();
-
 });
 
 // div area for timeslot - 10 -
 $("#tenA").click(function() {
 
-    if (editCount2 === 0) { 
-
+    if (editCount2 === 0 && $("#tenA").children().length === 0) {
+  
     editCount2 += 1;
 
     var taskP = $("<p>").addClass("taskP d-flex");
@@ -262,7 +303,7 @@ $("#tenButton").on("click", function() {
 // div area for timeslot - 11 -
 $("#elevenA").click(function() {
    
-    if (editCount3 === 0) { 
+    if (editCount3 === 0 && $("#elevenA").children().length === 0) {
 
     editCount3 += 1;
 
@@ -316,7 +357,7 @@ $("#elevenButton").on("click", function() {
 // div area for timeslot - 12 -
 $("#twelveP").click(function() {
    
-    if (editCount4 === 0) { 
+    if (editCount4 === 0 && $("#twelveP").children().length === 0) { 
 
     editCount4 += 1;
 
@@ -341,7 +382,7 @@ $("#twelveP").click(function() {
     
     } else if (editCount4 > 0) {
         
-        var text = $("#twelvePP").text().trim();
+        var text = $("#twelveP").text().trim();
 
         var textInput = $("<textarea maxlength='80'>").val(text);
 
@@ -370,7 +411,7 @@ $("#twelveButton").on("click", function() {
 // div area for timeslot - 1 -
 $("#oneP").click(function() {
    
-    if (editCount5 === 0) { 
+    if (editCount5 === 0 && $("#oneP").children().length === 0) { 
 
     editCount5 += 1;
 
@@ -424,7 +465,7 @@ $("#oneButton").on("click", function() {
 // div area for timeslot - 2 -
 $("#twoP").click(function() {
     
-    if (editCount6 === 0) { 
+    if (editCount6 === 0 && $("#twoP").children().length === 0) { 
 
     editCount6 += 1;
 
@@ -478,7 +519,7 @@ $("#twoButton").on("click", function() {
 // div area for timeslot - 3 -
 $("#threeP").click(function() {
    
-    if (editCount7 === 0) { 
+    if (editCount7 === 0 && $("#threeP").children().length === 0) { 
 
     editCount7 += 1;
 
@@ -532,7 +573,7 @@ $("#threeButton").on("click", function() {
 // div area for timeslot - 4 -
 $("#fourP").click(function() {
     
-    if (editCount8 === 0) { 
+    if (editCount8 === 0 && $("#fourP").children().length === 0) { 
 
     editCount8 += 1;
 
@@ -586,7 +627,7 @@ $("#fourButton").on("click", function() {
 // div area for timeslot - 5 -
 $("#fiveP").click(function() {
     
-    if (editCount9 === 0) { 
+    if (editCount9 === 0 && $("#fiveP").children().length === 0) { 
 
     editCount9 += 1;
 
@@ -637,17 +678,19 @@ $("#fiveButton").on("click", function() {
     saveTasks();
 });
 
+//LOAD TASKS AT THE BEGINNING
+loadTasks();
 
-var timeSlotsRefresh = function() {
-    
+function refreshTimeslots() {
     var today = new Date();
     var time = today.getHours();
 
     // select timeslots by class and remove the class before refreshing 
-    var timeSlots = $(".col-8 border-gradient border-gradient-purple d-flex align-items-center")
+    var timeSlots = $(".col-8.border-gradient.border-gradient-purple.d-flex.align-items-center")
+
     $(timeSlots).removeClass("present past future");
 
-    nineEl = 9;
+    var nineEl = 9;
 
     // if number in hours is less than its in the past, if its greater than its in the future else present
     if (nineEl < time) {
@@ -658,7 +701,7 @@ var timeSlotsRefresh = function() {
        $("#nineA").addClass("present");
     }
 
-    tenEl = 10;
+    var tenEl = 10;
 
     if (tenEl < time) {
        $("#tenA").addClass("past")
@@ -668,7 +711,7 @@ var timeSlotsRefresh = function() {
        $("#tenA").addClass("present");
     }
 
-    elevenEl = 11;
+    var elevenEl = 11;
 
     if (elevenEl < time) {
        $("#elevenA").addClass("past");
@@ -678,7 +721,7 @@ var timeSlotsRefresh = function() {
        $("#elevenA").addClass("present");
     }
 
-    twelveEl = 12;
+    var twelveEl = 12;
 
     if (twelveEl < time) {
        $("#twelveP").addClass("past")
@@ -688,7 +731,7 @@ var timeSlotsRefresh = function() {
        $("#twelveP").addClass("present");
     }
 
-    oneEl = 13;
+    var oneEl = 13;
 
     if (oneEl < time) {
        $("#oneP").addClass("past");
@@ -698,7 +741,7 @@ var timeSlotsRefresh = function() {
        $("#oneP").addClass("present");
     }
 
-    twoEl = 14;
+    var twoEl = 14;
 
     if (twoEl < time) {
        $("#twoP").addClass("past")
@@ -708,7 +751,7 @@ var timeSlotsRefresh = function() {
        $("#twoP").addClass("present");
     }
 
-    threeEl = 15;
+    var threeEl = 15;
 
     if (threeEl < time) {
        $("#threeP").addClass("past");
@@ -718,7 +761,7 @@ var timeSlotsRefresh = function() {
        $("#threeP").addClass("present");
     }
 
-    fourEl = 16;
+    var fourEl = 16;
 
     if (fourEl < time) {
        $("#fourP").addClass("past")
@@ -728,7 +771,7 @@ var timeSlotsRefresh = function() {
        $("#fourP").addClass("present");
     }
 
-    fiveEl = 17;
+    var fiveEl = 17;
 
     if (fiveEl < time) {
        $("#fiveP").addClass("past")
@@ -737,13 +780,9 @@ var timeSlotsRefresh = function() {
     } else { 
        $("#fiveP").addClass("present");
     }
-
-
 }
 
-loadTasks();
+refreshTimeslots();
 
-timeSlotsRefresh();
-
-// refresh the page every 5 minutes 
-setInterval(timeSlotsRefresh, 300000);
+// refresh the page every minute
+setInterval(refreshTimeslots, 60000);
